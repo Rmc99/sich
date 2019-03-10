@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div>
+    <div>
+        <a href="{% url 'login' %}">Entrar</a><br>
+        Criar meu <a href="{% url 'usuario:registrar' %}">Login</a>
+    </div>
+    <div>
+        <h2>Bem vindo ao sistema de inscrição do CCH</h2>
+    </div>
+    <div>
+        <h2>Eventos Abertos</h2>
+        {% for e in evento %}
+            {% if e.situacao == 2 %}
+                {{e.nome}}
+            {% else %}
+                Nenhum Evento aberto!
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+    {{ qtd_curso }}
+
+
+</body>
+</html>

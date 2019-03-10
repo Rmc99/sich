@@ -46,6 +46,10 @@ class Candidato(models.Model):
     celular = models.CharField(max_length=15, null=False, verbose_name="Celular", blank=True)
     usuario = models.OneToOneField(User, related_name="candidato", on_delete=models.CASCADE)
 
+    @property
+    def email(self):
+        return self.usuario.email
+
     def __str__(self):
         return self.nome
 
@@ -57,7 +61,8 @@ class Inscricao(models.Model):
     candidato = models.ForeignKey(Candidato, related_name="inscricao", on_delete=models.CASCADE)
     evento = models.ForeignKey(Evento, related_name="evento", on_delete=models.CASCADE, blank=True)
     curso = models.ForeignKey(Curso, related_name="curso", on_delete=models.CASCADE, blank=True)
-    dta_inscricao = models.DateTimeField(auto_now_add= True)
+    dta_criacao = models.DateTimeField(editable=False, auto_now_add=True)
+    dta_atualizacao = models.DateTimeField(editable=False, auto_now=True)
 
     def __str__(self):
         return self.id

@@ -1,23 +1,25 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import InscricaoForm, CandidatoForm
 from django.contrib import messages
+from .models import *
 
+@login_required
 def ficha_inscricao(request):
-    f = CandidatoForm(request.POST, request.FILES)
+    form1 = CandidatoForm(request.POST, request.FILES)
+    form2 = InscricaoForm(request.POST)
     if request.method == 'POST':
-        if f.is_valid():
-            candidato = f.save(commit=False)
+        if form1.is_valid() and form2.is_valid():
+            candidato = form1.save(commit=False)
+            inscricao = form2.save(commit=False)
+            inscricao.candidato = request.user.candidato
             candidato.usuario = request.user
+            inscricao.save()
             candidato.save()
             messages.success(request, 'Operação realizada com sucesso!')
-            return redirect('inscricao:ficha_inscricao')
+            return redirect('inscricao:home')
+    return render(request, 'ficha_inscricao.html', {'form1': form1, 'form2': form2})
 
-    form = InscricaoForm(request.POST)
-    if request.method == 'POST':
-        if form.is_valid():
-            inscricao = form.save(commit=False)
-            inscricao.usuario = request.user
-            inscricao.save()
-            messages.success(request, 'Operação realizada com sucesso!')
-            return redirect('inscricao:ficha_inscricao')
-    return render(request, 'ficha_inscricao.html', {'form': form, 'f': f})
+def home(request):
+    e = Evento.objects.all()
+    return render(request, 'home.html', {'evento': e})

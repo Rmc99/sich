@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'calculo_irpf',
     'inscricao',
+    'usuario',
     'debug_toolbar',
 ]
 
@@ -129,3 +130,6 @@ STATIC_DIR = [
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/ficha_inscricao/'
+LOGOUT_REDIRECT_URL = '/'

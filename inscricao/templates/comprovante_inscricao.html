@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprovante de Inscrição</title>
+</head>
+<body>
+
+    <strong>Número de Inscricao:</strong> {{inscricao.id}}<br>
+    <strong>Nome do candidato:</strong> {{inscricao.candidato}}<br>
+    <strong>Evento:</strong> {{inscricao.evento}}<br>
+    <strong>Curso:</strong> {{inscricao.curso}}<br>
+    <strong>Data da inscrição:</strong> {{inscricao.dta_criacao}}<br>
+    <input type="button" value="Imprimir em HTML" onClick="window.print()" />
+    <input type="button" value="Imprimir em PDF" onClick="window.print()" />
+
+</body>
+</html>

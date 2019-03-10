@@ -11,11 +11,11 @@ def ficha_inscricao(request):
     if request.method == 'POST':
         if form1.is_valid() and form2.is_valid():
             candidato = form1.save(commit=False)
+            candidato.usuario = request.user
+            candidato.save()
             inscricao = form2.save(commit=False)
             inscricao.candidato = request.user.candidato
-            candidato.usuario = request.user
             inscricao.save()
-            candidato.save()
             messages.success(request, 'Operação realizada com sucesso!')
             return redirect('inscricao:home')
     return render(request, 'ficha_inscricao.html', {'form1': form1, 'form2': form2})

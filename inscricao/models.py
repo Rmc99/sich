@@ -65,7 +65,8 @@ class Inscricao(models.Model):
     dta_atualizacao = models.DateTimeField(editable=False, auto_now=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
+
 
     class Meta:
         verbose_name_plural = 'Inscrições'

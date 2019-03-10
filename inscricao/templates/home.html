@@ -1,31 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-<div>
-    <div>
-        <a href="{% url 'login' %}">Entrar</a><br>
-        Criar meu <a href="{% url 'usuario:registrar' %}">Login</a>
-    </div>
-    <div>
-        <h2>Bem vindo ao sistema de inscrição do CCH</h2>
-    </div>
-    <div>
-        <h2>Eventos Abertos</h2>
-        {% for e in evento %}
-            {% if e.situacao == 2 %}
-                {{e.nome}}
-            {% else %}
-                Nenhum Evento aberto!
-            {% endif %}
-        {% endfor %}
+{% extends "base.html" %}
+<div>{% block title %}Sistema de Inscrição em Eventos{% endblock %}</div>
+{% block body %}
+
+<div class="container">
+    <div class="modal-body">
+        <h2 class="modal-title">Faça sua inscrição</h2>
+            {% for e in evento %}
+                {% if e.situacao == 2 %}
+                    <li class="list-group-item-action:focus">{{e.nome}}</li>
+                {% else %}
+                    Nenhum Evento aberto!
+                {% endif %}
+            {% endfor %}
     </div>
 </div>
-    {{ qtd_curso }}
 
 
-</body>
-</html>
+
+<div class="box">
+    Criar meu <a href="{% url 'usuario:registrar' %}">Login</a><br>
+    <a href="{% url 'login' %}">Entrar</a><br>
+</div>
+
+{% endblock %}

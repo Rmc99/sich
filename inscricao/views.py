@@ -8,6 +8,8 @@ from .models import *
 def ficha_inscricao(request):
     form1 = CandidatoForm(request.POST, request.FILES)
     form2 = InscricaoForm(request.POST)
+    # TODO Verificar o problema de inserir o candidato e não fazer a inscrição. Ou faz tudo ou não faz.
+
     if request.method == 'POST':
         if form1.is_valid() and form2.is_valid():
             candidato = form1.save(commit=False)

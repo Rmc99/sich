@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+		<link href="{% static 'css/main.css' %}" rel="stylesheet">
+        <title>{% block title %}{% endblock %}</title>
+        <div class="container" align="center">
+            <img class="mr-3" src="static/img/logo.jpg" alt="logo">
+            <div class="media-body">
+                <h5 class="mt-0">MEU CAMPUS</h5>
+            </div>
+        </div>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				{% if requeste.user.candidato %}
+                    <ul class="nav nav-pills pull-right">
+                        <li class=""><a href="{% url 'inscricao:home' %}">{{request.user.candidato}}</a></li>
+                        <li class=""><a href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                {% endif %}
+			</div>
+			<div class="row content">
+				{% block body %}{% endblock %}
+			</div>
+            {% block footer %}{% endblock %}
+		</div>
+	</body>
+</html>

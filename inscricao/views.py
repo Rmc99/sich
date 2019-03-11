@@ -19,7 +19,7 @@ def ficha_inscricao(request):
             inscricao.candidato = request.user.candidato
             inscricao.save()
             messages.success(request, 'Operação realizada com sucesso!')
-            return redirect('inscricao:home')
+            return redirect('inscricao:ficha_inscricao')
     return render(request, 'ficha_inscricao.html', {'form1': form1, 'form2': form2})
 
 def home(request):

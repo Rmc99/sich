@@ -1,24 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ficha de Inscrição</title>
-</head>
-<body>
-
-<form method="post" enctype="multipart/form-data">
+{% extends 'base.html' %}
+{% block title %}Formulário de inscrição{% endblock %}
+{% block body %}
+<form method="post">
     {% csrf_token %}
-    <div>
-        <h2>Dados Pessoais</h2>
+    <p><div>
+        <h4 class="text-muted">DADOS PESSOAIS</h4>
+    </div></p>
+    <div class="form-control">
         {{form1.as_p}}
     </div>
-
-    <div>
-        <h2>Inscrição</h2>
+    <p><div>
+        <h4 class="text-muted">DADOS DA INSCRIÇÃO</h4>
+    </div></p>
+    <div class="form-control">
         {{form2.as_p}}
     </div>
-
-    <button type="submit" class="btn-success">Salvar</button>
+    <br>
+    <p><button class="btn btn-primary btn-lg" type="submit" class="btn-success">
+        Fazer minha inscrição</button></p>
 </form>
-</body>
-</html>
+{% endblock %}
+<p>{% block footer %} {% include 'footer.html' %} {% endblock %}</p>

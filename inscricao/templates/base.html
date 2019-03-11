@@ -8,7 +8,7 @@
 		<link href="{% static 'inscricao/css/main.css' %}" rel="stylesheet">
         <title>{% block title %}{% endblock %}</title>
         <div class="container" align="center">
-            <img class="mr-3" src="static/inscricao/img/logo.jpg" alt="logo">
+            <img class="mr-3" src="../static/inscricao/img/logo.jpg" alt="logo">
             <div class="media-body">
                 <h5 class="mt-0">MEU CAMPUS</h5>
             </div>
@@ -24,9 +24,8 @@
                     </ul>
                 {% endif %}
 			</div>
-			<div class="row content">
-				{% block body %}{% endblock %}
-			</div>
+			{% block body %}{% endblock %}
+
 		</div>
 	</body>
 {% block footer %}{% endblock %}

@@ -37,7 +37,7 @@ class Candidato(models.Model):
         ("F", "Feminino"),
     )
     nome = models.CharField(max_length=150, null=False, verbose_name="Nome do Candidato", blank=True)
-    cpf = models.CharField(verbose_name='CPF', max_length=14, null=False)
+    cpf = models.CharField(verbose_name='CPF', max_length=14, null=False, blank=True)
     endereco = models.CharField(max_length=200, null=False, verbose_name="Endereço", blank=True)
     matricula = models.CharField(max_length=25, verbose_name="Matrícula", blank=True)
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES, null=False, verbose_name="Sexo", blank=True)

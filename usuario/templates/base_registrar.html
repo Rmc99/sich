@@ -17,10 +17,11 @@
 			{% for message in messages %}
         		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
     		{% endfor %}
-			<div class="row content">
+			<div class="container">
 				{% block body %}
 				{% endblock %}
 			</div>
 		</div>
 	</body>
+{% block footer %}{% endblock %}
 </html>

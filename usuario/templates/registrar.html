@@ -10,7 +10,10 @@
             {{ field }}
             {{ field.errors }}
         {% endfor %}
-        <button type="submit" class="btn-success">Criar usuário</button>
     </div>
+    <br>
+    <p><button class="btn btn-primary btn-lg" type="submit" class="btn-success">
+        Criar usuário</button></p>
 </form>
 {% endblock %}
+<p>{% block footer %} {% include 'footer.html' %} {% endblock %}</p>

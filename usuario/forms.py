@@ -4,8 +4,8 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class RegisterForm(forms.ModelForm):
-    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirmação de Senha', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Confirmação de Senha', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -28,3 +28,8 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email']
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.TextInput(attrs={'class': 'form-control', 'size': '50'}),
+        }

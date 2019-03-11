@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrar</title>
-</head>
-<body>
-
-
- <div>
-    <div><h2>Informe seus dados</h2>
-        <form method="post">
-            {% csrf_token %}
-
-            <fieldset>
-                {{ form.non_field_errors}}
-
-                {% for field in form %}
-                    <div>
-                        {{ field.label_tag }}
-                        {{ field }}
-                        {{ field.errors }}
-                    </div>
-                {% endfor %}
-
-                <div>
-                    <button type="submit">Cadastrar</button>
-                </div>
-            </fieldset>
-        </form>
+{% extends 'base_registrar.html' %}
+{% block title %}Criação de usuário{% endblock %}
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+    <div class="form-control">
+        {{ form.non_field_errors}}
+        {% for field in form %}
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+        {% endfor %}
+        <button type="submit" class="btn-success">Criar usuário</button>
     </div>
- </div>
-
-
-</body>
-</html>
+</form>
+{% endblock %}

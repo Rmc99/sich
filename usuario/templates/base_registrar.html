@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="pt">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<link href="{% static 'usuario/css/bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'usuario/css/bootstrap-reboot.css' %}" rel="stylesheet">
+		<link href="{% static 'usuario/css/main.css' %}" rel="stylesheet">
+		<title>{% block title %}{% endblock %}</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<h3 class="text-muted">CRIAÇÃO DE USUÁRIO</h3>
+			</div>
+			{% for message in messages %}
+        		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    		{% endfor %}
+			<div class="row content">
+				{% block body %}
+				{% endblock %}
+			</div>
+		</div>
+	</body>
+</html>

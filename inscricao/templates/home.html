@@ -1,25 +1,20 @@
 {% extends "base.html" %}
-<div>{% block title %}Sistema de Inscrição em Eventos{% endblock %}</div>
+{% block title %}Sistema de Inscrição em Eventos{% endblock %}
 {% block body %}
-
-<div class="container">
-    <div class="modal-body">
-        <h2 class="modal-title">Faça sua inscrição</h2>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Inscrição Online</h1>
+            <p class="lead">Todos os eventos com inscrições abertas estão listados abaixo:</p>
             {% for e in evento %}
                 {% if e.situacao == 2 %}
-                    <li class="list-group-item-action:focus">{{e.nome}}</li>
+                    <a href="{% url 'login' %}">{{e.nome}}</a><br>
                 {% else %}
                     Nenhum Evento aberto!
                 {% endif %}
             {% endfor %}
+        </div>
     </div>
-</div>
-
-
-
-<div class="box">
-    Criar meu <a href="{% url 'usuario:registrar' %}">Login</a><br>
-    <a href="{% url 'login' %}">Entrar</a><br>
-</div>
-
+    <a class="btn btn-primary btn-lg" href="{% url 'usuario:registrar' %}"
+       role="button">Desejo criar meu login</a>
 {% endblock %}
+{% block footer %} {% include 'footer.html' %} {% endblock %}

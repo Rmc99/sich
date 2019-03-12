@@ -1,12 +1,15 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import MultipleObjectsReturned
 from django.shortcuts import render, redirect
 from .forms import InscricaoForm, CandidatoForm
 from django.contrib import messages
 from .models import *
 
+
 def home(request):
     e = Evento.objects.all()
     return render(request, 'home.html', {'evento': e})
+
 
 @login_required
 def dashboard(request):
@@ -17,6 +20,7 @@ def dashboard(request):
                       {'lista': lista_candidato})
     except Candidato.DoesNotExist:
         return redirect('inscricao:ficha_inscricao')
+
 
 @login_required
 def ficha_inscricao(request):
@@ -36,14 +40,29 @@ def ficha_inscricao(request):
             return redirect('inscricao:comprovante_inscricao')
     return render(request, 'ficha_inscricao.html', {'form1': form1, 'form2': form2})
 
+
 @login_required
 def visualizar_cadastro(request):
     usuario = User.objects.get(pk=request.user.id)
     lista_candidato = Candidato.objects.get(usuario=usuario.id)
     return render(request, 'visualizar_cadastro.html', {'lista': lista_candidato})
 
+
 @login_required
 def comprovante_inscricao(request):
     i = Inscricao.objects.get(candidato_id=request.user.candidato)
-    c = Candidato.objects.get(usuario=request.user)
-    return render(request, 'comprovante_inscricao.html', {'i': i, 'c': c})
+#    c = Candidato.objects.get(usuario=request.user)
+#    return render(request, 'comprovante_inscricao.html', {'i': i, 'c': c})
+    return render(request, 'comprovante_inscricao.html', {'i': i})
+
+@login_required
+def nova_inscricao(request):
+    form = InscricaoForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            inscricao = form.save(commit=False)
+            inscricao.candidato = request.user.candidato
+            inscricao.save()
+            messages.success(request, 'Inscrição confirmada no curso')
+            return redirect('inscricao:comprovante_inscricao')
+    return render(request, 'nova_inscricao.html', {'form': form})

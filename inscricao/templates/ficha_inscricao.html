@@ -5,7 +5,7 @@
     {% if request.user %}
         <ul align="right">
             <span class="text-muted">Usuário: </span><a href="{% url 'inscricao:ficha_inscricao' %}">{{request.user}}</a><br>
-            <span class="text-muted"></span><a href="{% url 'logout' %}">Logout</a>
+            <span class="text-muted"></span><a href="{% url 'logout' %}">Sair</a>
         </ul>
     {% endif %}
 </div>

@@ -4,6 +4,10 @@ from .forms import InscricaoForm, CandidatoForm
 from django.contrib import messages
 from .models import *
 
+def home(request):
+    e = Evento.objects.all()
+    return render(request, 'home.html', {'evento': e})
+
 @login_required
 def ficha_inscricao(request):
     form1 = CandidatoForm(request.POST, request.FILES)
@@ -19,9 +23,11 @@ def ficha_inscricao(request):
             inscricao.candidato = request.user.candidato
             inscricao.save()
             messages.success(request, 'Operação realizada com sucesso!')
-            return redirect('inscricao:ficha_inscricao')
+            return redirect('inscricao:comprovante_inscricao')
     return render(request, 'ficha_inscricao.html', {'form1': form1, 'form2': form2})
 
-def home(request):
-    e = Evento.objects.all()
-    return render(request, 'home.html', {'evento': e})
+@login_required
+def comprovante_inscricao(request):
+    i = Inscricao.objects.get(candidato_id=request.user.candidato)
+    c = Candidato.objects.get(usuario=request.user)
+    return render(request, 'comprovante_inscricao.html', {'i': i, 'c': c})

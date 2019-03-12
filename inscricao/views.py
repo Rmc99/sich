@@ -9,6 +9,16 @@ def home(request):
     return render(request, 'home.html', {'evento': e})
 
 @login_required
+def dashboard(request):
+    usuario = User.objects.get(pk=request.user.id)
+    try:
+        lista_candidato = Candidato.objects.get(usuario=usuario.id)
+        return render(request, 'dashboard.html',
+                      {'lista': lista_candidato})
+    except Candidato.DoesNotExist:
+        return redirect('inscricao:ficha_inscricao')
+
+@login_required
 def ficha_inscricao(request):
     form1 = CandidatoForm(request.POST, request.FILES)
     form2 = InscricaoForm(request.POST)
@@ -25,6 +35,12 @@ def ficha_inscricao(request):
             messages.success(request, 'Operação realizada com sucesso!')
             return redirect('inscricao:comprovante_inscricao')
     return render(request, 'ficha_inscricao.html', {'form1': form1, 'form2': form2})
+
+@login_required
+def visualizar_cadastro(request):
+    usuario = User.objects.get(pk=request.user.id)
+    lista_candidato = Candidato.objects.get(usuario=usuario.id)
+    return render(request, 'visualizar_cadastro.html', {'lista': lista_candidato})
 
 @login_required
 def comprovante_inscricao(request):

@@ -15,12 +15,22 @@
         </div>
 	</head>
 	<body>
+	<div class="container">
+		<div class="header">
+			{% if request.user %}
+				<ul align="right">
+					<span class="text-muted">Usuário: </span><a href="{% url 'inscricao:dashboard' %}">{{request.user}}</a><br>
+					<span class="text-muted"></span><a href="{% url 'logout' %}">Sair</a>
+				</ul>
+			{% endif %}
+		</div>
 		{% for message in messages %}
 			<div class="alert alert-{{ message.tags }}">{{ message }}</div>
 		{% endfor %}
 		<div class="container">
 			{% block body %}{% endblock %}
 		</div>
+	</div>
 	</body>
-{% block footer %}{% endblock %}
+	<p>{% block footer %}{% endblock %}</p>
 </html>

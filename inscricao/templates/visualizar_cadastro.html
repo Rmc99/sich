@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Meus dados{% endblock %}
+{% block body %}
+    <strong>Nome: </strong>{{lista.nome}}<br>
+    <strong>CPF: </strong>{{lista.cpf}}<br>
+    <strong>Endereço: </strong>{{lista.endereco}}<br>
+    <strong>Matrícula: </strong>{{lista.matricula}}<br>
+    <strong>Sexo: </strong>{{lista.sexo}}<br>
+    <strong>Data de Nascimento: </strong>{{lista.dta_nascimento}}<br>
+    <strong>Curriculo: </strong>{{lista.curriculo}}<br>
+    <strong>Celular: </strong>{{lista.celular}}<br>
+    <br>
+    <a href="{% url 'inscricao:dashboard' %}">Voltar</a>
+{% endblock %}

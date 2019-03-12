@@ -4,13 +4,12 @@
 <form method="post">
     {% csrf_token %}
     <strong>Número de inscrição:</strong> {{i.id}}<br>
-<!--    <strong>Nome do candidato:</strong> {{c.nome}}<br>-->
-    <strong>Nome do candidato:</strong> {{i.candidato}}<br>
-<!--    <strong>CPF:</strong> {{c.cpf}}<br>
+    <strong>Nome do candidato:</strong> {{c.nome}}<br>
+    <strong>CPF:</strong> {{c.cpf}}<br>
     <strong>Endereço:</strong> {{c.endereco}}<br>
     <strong>Matrícula:</strong> {{c.matricula}}<br>
     <strong>Data de nascimento:</strong> {{c.dta_nascimento}}<br>
-    <strong>Celular:</strong> {{c.celular}}<br>-->
+    <strong>Celular:</strong> {{c.celular}}<br>
     <strong>Evento:</strong> {{i.evento}}<br>
     <strong>Curso:</strong> {{i.curso}}<br>
     <br>

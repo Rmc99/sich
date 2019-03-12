@@ -50,10 +50,10 @@ def visualizar_cadastro(request):
 
 @login_required
 def comprovante_inscricao(request):
+    c = Candidato.objects.get(usuario=request.user)
     i = Inscricao.objects.get(candidato_id=request.user.candidato)
-#    c = Candidato.objects.get(usuario=request.user)
-#    return render(request, 'comprovante_inscricao.html', {'i': i, 'c': c})
-    return render(request, 'comprovante_inscricao.html', {'i': i})
+    return render(request, 'comprovante_inscricao.html', {'i': i, 'c': c})
+#    return render(request, 'comprovante_inscricao.html', {'i': i})
 
 @login_required
 def nova_inscricao(request):

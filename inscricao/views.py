@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import MultipleObjectsReturned
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from .forms import InscricaoForm, CandidatoForm
 from django.contrib import messages
 from .models import *
@@ -49,11 +50,13 @@ def visualizar_cadastro(request):
 
 
 @login_required
-def comprovante_inscricao(request):
+def comprovante_inscricao(request, pk):
     c = Candidato.objects.get(usuario=request.user)
-    i = Inscricao.objects.get(candidato_id=request.user.candidato)
+# TODO Tem que receber o número da inscrição via POST
+    i = Inscricao.objects.get(pk=pk)
     return render(request, 'comprovante_inscricao.html', {'i': i, 'c': c})
 #    return render(request, 'comprovante_inscricao.html', {'i': i})
+
 
 @login_required
 def nova_inscricao(request):
@@ -64,5 +67,6 @@ def nova_inscricao(request):
             inscricao.candidato = request.user.candidato
             inscricao.save()
             messages.success(request, 'Inscrição confirmada no curso')
-            return redirect('inscricao:comprovante_inscricao')
+            url_comprovante = reverse_lazy('inscricao:comprovante_inscricao', kwargs={'pk': inscricao.pk})
+            return redirect(url_comprovante)
     return render(request, 'nova_inscricao.html', {'form': form})
